@@ -1,0 +1,23 @@
+{
+  "name": "codetank",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bullet.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --config webpack.config.js --port 3000 --host 0.0.0.0 --progress --color --profile --history-api-fallback"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "express-urlrewrite": "^1.2.0",
+    "fs": "^0.0.2",
+    "path": "^0.12.7",
+    "ts-loader": "^0.8.2",
+    "typescript": "^1.8.10",
+    "webpack": "^1.13.0",
+    "webpack-dev-middleware": "^1.6.1"
+  }
+}
