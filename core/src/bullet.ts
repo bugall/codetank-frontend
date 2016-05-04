@@ -5,25 +5,30 @@ export interface BulletInterface {
     getPositionHistory(bulletNumber?: number, userId?: number): [{ x: number, y: number, time: number }];
     getBulletsStatus(bulletNumber?: number, userId?: number): string;
     getRestAmount(userId: number): number;
-    actionOpenFire(position: { x: number, y: number }): boolean;
+    getBulletInfo(userId?:number):{};
+    //actionOpenFire(position: { x: number, y: number }): boolean;
     actionRloadBullet(): boolean;
+    
 }
 export class Bullet implements BulletInterface {
-    private BulletAmount: number = 0; //剩余炮弹的数量
-    private BulletUsed: number = 0; //使用了多少颗炮弹
-    private BulletsInfo: [{
+    private bulletAmount: number = 0; //剩余炮弹的数量
+    private bulletUsed: number = 0; //使用了多少颗炮弹
+    protected bulletIsReady:boolean = true; //炮弹是否填充好了
+    protected bulletsInfo: [{
         x: number,
         y: number,
         begin_time: number,
         status: string,
-    }] = [{ x: 0, y: 0, begin_time: 0, status: '' }];
-    private BulletSpeed: number = 0.0; //炮弹的速度(多少个单位时间)
+        roundNumber:number,
+        angle:number, //角度
+    }] = [{ x: 0, y: 0, begin_time: 0, status: '',roundNumber:0,angle:0}];
+    private bulletSpeed: number = 0.0; //炮弹的速度(一个回合多少个单位距离)
 
     constructor(bulletAmount: number, speed: number) {
-        this.BulletAmount = bulletAmount;
-        this.BulletSpeed = speed;
+        this.bulletAmount = bulletAmount;
+        this.bulletSpeed = speed;
     }
-
+   
     /** 
     * 保存发射炮弹的信息
     * @param {json} postion 炮弹发射的位置
@@ -31,12 +36,21 @@ export class Bullet implements BulletInterface {
     * @data 2016-04-28
     * @author bugall
     */
-    private addBulletPosition(position: { x: number, y: number }): boolean {
+    private addBulletPosition(position: { x: number, y: number },roundNumber:number,angle:number): boolean {
         let now = Date.parse(new Date() + '') / 1000;
-        this.BulletsInfo.push({ x: position.x, y: position.y, begin_time: now, status: 'fly' });
+        this.bulletsInfo.push({ x: position.x, y: position.y, begin_time: now, status: 'fly',roundNumber:roundNumber,angle:angle});
         return true;
     }
 
+    public getBulletInfo(){
+        return{
+            bulletAmount:this.bulletAmount,
+            bulletUsed:this.bulletUsed,
+            bulletIsReady:this.bulletIsReady,
+            bulletsInfo:this.bulletsInfo
+        }
+    }
+    
     /** 
     * 获取用户炮弹当前的位置
     * @param {number} bulletNumber 炮弹的编号
@@ -94,13 +108,17 @@ export class Bullet implements BulletInterface {
     * @data 2016-04-28
     * @author bugall
     */
-    public actionOpenFire(position: { x: number, y: number }): boolean {
-        this.BulletAmount--;
-        this.BulletUsed++;
-        this.addBulletPosition({ x: position.y, y: position.y });
-        return true;
+    protected bulletOpenFire(position: { x: number, y: number },roundNumber:number,angle:number): boolean {
+        //判断是否有炮弹,剩余炮弹大于等于1
+        if (this.bulletIsReady&&this.bulletAmount>=0) {
+            this.bulletAmount--;
+            this.bulletUsed++;
+            this.addBulletPosition({ x: position.y, y: position.y },roundNumber,angle);
+        }else{
+            return false;
+        }
     }
-
+    
     public actionRloadBullet(): boolean {
         return true;
     }

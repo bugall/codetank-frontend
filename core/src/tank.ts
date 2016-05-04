@@ -2,17 +2,17 @@ import * as bullet from './bullet'
 
 export interface TankInterface{
     actionGo(position:{x:number,y:number}):boolean;
-    getPosition(userId?:number):{x:number,y:number};
-    actionOpenFire(position:{x:number,y:number}):boolean;
+    getTankPosition(userId?:number):{x:number,y:number};
+    actionOpenFire(angle:number):boolean;
+    test():void;
 }
-
 export class Tank extends bullet.Bullet implements TankInterface {
     private isHaveTime:boolean;
     private isStartOfTurn:boolean;
     private selfPosition:{x:number,y:number}={x:0,y:0};
     private maxStepLength:number=0;
     private mapSize:{x:number,y:number}={x:0,y:0};
-    private BulletIsFull: boolean = false; //是否已经填充炮弹
+    private roundNumber:number=0; //第几回合
     
     constructor(opts:{
         bulletAmount:number, //默认炮弹的数量
@@ -23,6 +23,7 @@ export class Tank extends bullet.Bullet implements TankInterface {
         super(opts.bulletAmount,opts.speed);
         this.maxStepLength = opts.maxStepLength;
         this.mapSize = opts.mapSize;
+        this.test();
     } 
     
     /** 
@@ -40,7 +41,7 @@ export class Tank extends bullet.Bullet implements TankInterface {
         return true;
     }
     
-     /** 
+    /** 
     * 移动
     * @param {json} postion 移动到的位置
     * @returns boolean 
@@ -49,7 +50,7 @@ export class Tank extends bullet.Bullet implements TankInterface {
     */
     public actionGo(position:{x:number,y:number}):boolean{
         let isParamsPass:boolean = this.actionGoChech(position);
-        
+
         //更新移动后的状态
         if(isParamsPass){
             this.isHaveTime=false;
@@ -59,18 +60,45 @@ export class Tank extends bullet.Bullet implements TankInterface {
         return true;
     }
     
-     /** 
+    public actionOpenFire(angle:number):boolean{
+        let status:boolean = false
+            
+        if (!this.isStartOfTurn || !this.isHaveTime) {
+            throw new Error('回合暂未开始');
+        }else{
+            status = this.bulletOpenFire(this.selfPosition,this.roundNumber,angle);
+        }
+        return status;
+    }
+    /** 
     * 获取用户的位置
     * @param {number} userId 用户的id,不输入表示自己的位置
     * @returns JSON
     * @data 2016-05-01
     * @author bugall
     */
-    public getPosition(userId?: number): { x: number, y: number } {
+    public getTankPosition(userId?: number): { x: number, y: number } {
         if (!userId) {
             return this.selfPosition;
         } else {
             return { x: 0, y: 0 };
         }
+    }
+    
+    public test(){
+        let self = this;
+        setInterval(function(){
+            self.isHaveTime=true;
+            self.isStartOfTurn=true;
+            self.roundNumber++;
+            self.calculationBulletPosition();
+        },2000);
+    }
+    
+    //更新炮弹的位置
+    private calculationBulletPosition(){
+        console.log(this.bulletsInfo);
+        this.bulletsInfo.map(item=>{
+        })    
     }
 }

@@ -1,3 +1,4 @@
+"use strict";
 var Time = (function () {
     function Time() {
     }
@@ -5,6 +6,5 @@ var Time = (function () {
         console.log(name);
     };
     return Time;
-})();
+}());
 exports.Time = Time;
-//# sourceMappingURL=time.js.map
