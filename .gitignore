@@ -1,0 +1,6 @@
+node_modules/
+_build_/
+core/src/**/*.js.map
+core/src/**/*.js
+.idea/
+
