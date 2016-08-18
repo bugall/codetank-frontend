@@ -1,5 +1,9 @@
+/// <reference path='../typings/tsd.d.ts' />
 import * as bullet from './bullet'
+import {Transform} from './middleware/data-transaform'
 
+let tmp = new Transform('tes');
+console.log(tmp.createConnection());
 export interface TankInterface{
     actionGo(position:{x:number,y:number}):boolean;
     getTankPosition(userId?:number):{x:number,y:number};

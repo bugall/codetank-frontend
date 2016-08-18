@@ -8,3 +8,4 @@ var Time = (function () {
     return Time;
 }());
 exports.Time = Time;
+//# sourceMappingURL=time.js.map

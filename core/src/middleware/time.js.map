@@ -1,1 +1,1 @@
-{"version":3,"file":"time.js","sourceRoot":"","sources":["time.ts"],"names":["Time","Time.constructor","Time.showName"],"mappings":"AAIA;IAAAA;IAIAC,CAACA;IAHUD,uBAAQA,GAAfA,UAAgBA,IAAYA;QACxBE,OAAOA,CAACA,GAAGA,CAACA,IAAIA,CAACA,CAACA;IACtBA,CAACA;IACLF,WAACA;AAADA,CAACA,AAJD,IAIC;AAJY,YAAI,OAIhB,CAAA"}
+{"version":3,"file":"time.js","sourceRoot":"","sources":["time.ts"],"names":[],"mappings":";AAIA;IAAA;IAIA,CAAC;IAHU,uBAAQ,GAAf,UAAgB,IAAY;QACxB,OAAO,CAAC,GAAG,CAAC,IAAI,CAAC,CAAC;IACtB,CAAC;IACL,WAAC;AAAD,CAAC,AAJD,IAIC;AAJY,YAAI,OAIhB,CAAA"}

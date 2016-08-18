@@ -21,3 +21,4 @@ function test() {
     // bulletInfo = Tanks.getBulletInfo();
     // console.log(bulletInfo);
 }
+//# sourceMappingURL=index.js.map

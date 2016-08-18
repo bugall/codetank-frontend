@@ -18,7 +18,7 @@ var Bullet = (function () {
     */
     Bullet.prototype.addBulletPosition = function (position, roundNumber, angle) {
         var now = Date.parse(new Date() + '') / 1000;
-        this.bulletsInfo.push({ x: position.x, y: position.y, begin_time: now, status: 'fly', roundNumber: roundNumber, angle: 0 });
+        this.bulletsInfo.push({ x: position.x, y: position.y, begin_time: now, status: 'fly', roundNumber: roundNumber, angle: angle });
         return true;
     };
     Bullet.prototype.getBulletInfo = function () {
@@ -99,3 +99,4 @@ var Bullet = (function () {
     return Bullet;
 }());
 exports.Bullet = Bullet;
+//# sourceMappingURL=bullet.js.map

@@ -4,7 +4,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+/// <reference path='../typings/tsd.d.ts' />
 var bullet = require('./bullet');
+var data_transaform_1 = require('./middleware/data-transaform');
+var tmp = new data_transaform_1.Transform('tes');
+console.log(tmp.createConnection());
 var Tank = (function (_super) {
     __extends(Tank, _super);
     function Tank(opts) {
@@ -95,3 +99,4 @@ var Tank = (function (_super) {
     return Tank;
 }(bullet.Bullet));
 exports.Tank = Tank;
+//# sourceMappingURL=tank.js.map
